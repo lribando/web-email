@@ -1,0 +1,30 @@
+<div class="main email-page">
+  <div class="loader"></div>
+  <header class="page-header">
+    <h3>
+      {{_lookupMessage "web_email" "oops"}}
+    </h3>
+  </header>
+  <section>
+    <p class="primary error-text-padding">{{_lookupMessage "web_email" "error_desc"}}</p>
+    <a href="https://www.gilt.com/web-account/email" class="button button-large-primary btn-width" />{{_lookupMessage "web_email" "log_in"}}</a>
+  </section>
+</div>
+{{#contentFor "scripts"}}
+<script type="text/javascript">
+
+  gilt.require([
+      'app.interstitial',
+      'common.page_controller'
+    ], function(
+      interstitial,
+      pageController
+    )
+    {
+      pageController.init({
+        error: true
+      });
+      interstitial.init();
+    });
+</script>
+{{/contentFor}}

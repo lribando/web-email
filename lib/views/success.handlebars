@@ -1,0 +1,43 @@
+<div class="main email-page">
+  <div class="loader"></div>
+  <header class="page-header">
+    <h3>
+      {{#if unsubAllEmails}}
+        {{_lookupMessage "web_email" "unsub_from"}} {{_lookupMessage "web_email" "all_emails"}}
+      {{/if}}
+      {{#if emailToSubscribe}}
+        {{_lookupMessage "web_email" "subscribe"}} {{_lookupMessage "web_email" emailToSubscribe}}
+      {{/if}}
+      {{#if stay}}
+        {{_lookupMessage "web_email" "continue"}} {{_lookupMessage "web_email" emailType}}
+      {{/if}}
+      {{#if noElseIfSupport}}
+        {{_lookupMessage "web_email" "unsub_from"}} {{_lookupMessage "web_email" emailType}}
+      {{/if}}
+    </h3>
+  </header>
+  <section>
+    {{#unless stay}}
+      <p class="primary error-text-padding">{{_lookupMessage "web_email" "unsub_messaging"}}</p>
+    {{/unless}}
+    <a href="https://www.gilt.com/web-account/email" class="button button-large-primary btn-width" />{{_lookupMessage "web_email" "manage_settings"}}</a>
+  </section>
+</div>
+{{#contentFor "scripts"}}
+<script type="text/javascript">
+
+  gilt.require([
+      'app.interstitial',
+      'common.page_controller'
+    ], function(
+      interstitial,
+      pageController
+    )
+    {
+      pageController.init({
+        error: false
+      });
+      interstitial.init();
+    });
+</script>
+{{/contentFor}}

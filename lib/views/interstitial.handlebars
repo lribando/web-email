@@ -1,0 +1,67 @@
+<div class="main email-page">
+  <div class="loader"></div>
+  <header class="page-header">
+    <h1 class="h1">Manage Your Settings</h1>
+  </header>
+  <section>
+    <p class="primary">{{_lookupMessage "web_email" "sale_reminder_desc"}}</p>
+    <hr class="hr" align="left" size="1" color="#e0e0de">
+    <h3 class="form-header">{{_lookupMessage "web_email" emailType}}</h3>
+    <form name="email-preferences" action="{{loginKey}}/" method="POST" class="form">
+      <p class="radio">
+        <label>
+          <input type="radio" name="sub-selection" value="stay" class="input-settings" checked="checked">
+        {{_lookupMessage "web_email" "keep_sub"}} {{_lookupMessage "web_email" emailType}}
+        </label>
+      </p>
+      {{#if showFrequency}}
+        <p class="radio">
+          <label>
+            <input type="radio" name="sub-selection" value="frequency" class="input-settings">
+            {{_lookupMessage "web_account" showFrequency}}
+          </label>
+        </p>
+      {{/if}}
+      <p class="radio">
+        <label>
+          <input type="radio" name="sub-selection" value="unsub_email" class="input-settings">{{_lookupMessage "web_email" "unsub_radio"}}&nbsp;{{_lookupMessage "web_email" emailType}}
+        </label>
+      </p>
+      <div class="loader hidden"><div class="spinner"></div></div>
+      <label>
+        <input type="submit" class="button-large-primary apply-cta btn-width" value="Apply Changes" />
+      </label>
+      <a href="https://www.gilt.com/web-account/email" class="button button-large-secondary btn-width" />{{_lookupMessage "web_email" "manage_subscriptions"}}</a>
+    </form>
+    <hr class="hr" align="left" size="1" color="#e0e0de">
+    <p class="primary unsub-header">{{_lookupMessage "web_email" "unsub_all_header_messaging"}}</p>
+    <form name="unsub-all" action="{{loginKey}}/unsubscribe_all" method="POST" class="form">
+      <div class="loader hidden"><div class="spinner"></div></div>
+      <fieldset class="form-area">
+        <p class="field-wide">
+          <label>
+            <input type="submit" class="button button-large-secondary btn-width" value="Unsubscribe From All Emails"/>
+          </label>
+        </p>
+      </fieldset>
+    </form>
+  </section>
+</div>
+{{#contentFor "scripts"}}
+<script type="text/javascript">
+
+  gilt.require([
+      'app.interstitial',
+      'common.page_controller'
+    ], function(
+      interstitial,
+      pageController
+    )
+    {
+      pageController.init({
+        error: false
+      });
+      interstitial.init();
+    });
+</script>
+{{/contentFor}}
